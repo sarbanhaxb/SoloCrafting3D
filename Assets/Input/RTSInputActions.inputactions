@@ -1,0 +1,95 @@
+{
+    "version": 1,
+    "name": "RTSInputActions",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "d7dc6f86-d7b8-448d-babd-6e3881e9a96e",
+            "actions": [
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "a7ce17ce-5bf5-46b9-b76b-10234a940a0f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "7247ad18-fb27-4269-a93f-978458952b20",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectDrag",
+                    "type": "Button",
+                    "id": "e0bc162d-6d60-4ec9-8e79-31cf918d3602",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectModifier",
+                    "type": "Button",
+                    "id": "5e483ade-9aef-4023-8338-7090d665bc16",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ebfa851c-0c2a-4100-8fd8-5873a58ce833",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3971943-475a-4a6c-8296-1df9791e35b3",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b28d3280-3b2d-464c-9e15-478612c622cf",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(pressPoint=0.1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectDrag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c0abc94-a6c5-4699-8d5b-dfc3305c6101",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectModifier",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
