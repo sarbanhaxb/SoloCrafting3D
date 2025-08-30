@@ -7,6 +7,7 @@ public abstract class AbstractUnit : MonoBehaviour, ISelectable, IMoveable
 {
     [SerializeField] private DecalProjector decalProjector;
     private NavMeshAgent agent;
+    public float AgentRadius { get => agent.radius; }
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
