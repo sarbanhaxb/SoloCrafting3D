@@ -7,13 +7,17 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private Rigidbody cameraTarger;
     [SerializeField] private CinemachineCamera cinemachineCamera;
+    [SerializeField] private new Camera camera;
     [SerializeField] private CameraConfig cameraConfig;
+    [SerializeField] private LayerMask selectableUnitsLayer;
+    [SerializeField] private LayerMask floorLayers;
 
     private CinemachineFollow cinemachineFollow;
     private float zoomStartTime;
     private float rotationStartTime;
     private Vector3 startingFollowOffset;
     private float maxRotationAmount;
+    private ISelectable selectedUnit;
 
 
     private void Awake()
@@ -32,7 +36,47 @@ public class PlayerInput : MonoBehaviour
         HandlePanning();
         HandleZooming();
         HandleRotation();
-        
+        HandleLeftClick();
+        HandleRightClick();
+    }
+
+    private void HandleRightClick()
+    {
+        if (selectedUnit ==  null || selectedUnit is not IMoveable moveable) return;
+
+
+        Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        if (Mouse.current.rightButton.wasReleasedThisFrame 
+            && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, floorLayers))
+        {
+            moveable.MoveTo(hit.point);
+        }
+
+
+    }
+
+    private void HandleLeftClick()
+    {
+        if (camera == null) return;
+
+        Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            if (selectedUnit != null)
+            {
+                selectedUnit.Deselect();
+                selectedUnit = null;
+            }
+
+            if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayer)
+            && hit.collider.TryGetComponent(out ISelectable selectable))
+            {
+                selectable.Select();
+                selectedUnit = selectable;
+            }
+        }
     }
 
     private void HandleRotation()

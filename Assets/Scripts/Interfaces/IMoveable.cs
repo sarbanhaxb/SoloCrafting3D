@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public interface IUnit
+public interface IMoveable
 {
     void MoveTo(Vector3 position);
-    void Stop();
 }
