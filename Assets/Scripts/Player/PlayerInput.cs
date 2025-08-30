@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,13 +12,18 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private CameraConfig cameraConfig;
     [SerializeField] private LayerMask selectableUnitsLayer;
     [SerializeField] private LayerMask floorLayers;
+    [SerializeField] private RectTransform selectionBox;
+
+    private Vector2 startingMousePosition;
 
     private CinemachineFollow cinemachineFollow;
     private float zoomStartTime;
     private float rotationStartTime;
     private Vector3 startingFollowOffset;
     private float maxRotationAmount;
-    private ISelectable selectedUnit;
+    private HashSet<AbstractUnit> aliveUnits = new(100);
+    private HashSet<AbstractUnit> addedUnits = new(24);
+    private List<ISelectable> selectedUnits = new(12);
 
 
     private void Awake()
@@ -29,28 +35,119 @@ public class PlayerInput : MonoBehaviour
 
         startingFollowOffset = cinemachineFollow.FollowOffset;
         maxRotationAmount = Mathf.Abs(cinemachineFollow.FollowOffset.z);
+
+        Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
+        Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
+        Bus<UnitSpawnEvent>.OnEvent += HandleUnitSpawn;
     }
+
+    private void HandleUnitSpawn(UnitSpawnEvent evt) => aliveUnits.Add(evt.Unit);
+    private void HandleUnitSelected(UnitSelectedEvent evt) => selectedUnits.Add(evt.Unit);
+    private void HandleUnitDeselected(UnitDeselectedEvent evt) => selectedUnits.Remove(evt.Unit);
 
     private void Update()
     {
         HandlePanning();
         HandleZooming();
         HandleRotation();
-        HandleLeftClick();
         HandleRightClick();
+        HandleDragSelect();
+    }
+
+    private void HandleDragSelect()
+    {
+        if (selectionBox == null) return;
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            HandleMouseDown();
+        }
+        else if (Mouse.current.leftButton.isPressed && !Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            HandleMouseDrag();
+        }
+        else if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            HandleMouseUp();
+        }
+    }
+
+    private void HandleMouseUp()
+    {
+        if (!Keyboard.current.shiftKey.isPressed)
+        {
+            DeselectAllUnits();
+        }
+        HandleLeftClick();
+
+        foreach (AbstractUnit unit in addedUnits)
+        {
+            unit.Select();
+        }
+        selectionBox.gameObject.SetActive(false);
+    }
+
+    private void HandleMouseDrag()
+    {
+        Bounds selectionBoxBounds = ResizeSelectiobBox();
+        foreach (AbstractUnit unit in aliveUnits)
+        {
+            Vector2 unitPoision = camera.WorldToScreenPoint(unit.transform.position);
+
+            if (selectionBoxBounds.Contains(unitPoision))
+            {
+                addedUnits.Add(unit);
+            }
+        }
+    }
+
+    private void HandleMouseDown()
+    {
+        selectionBox.sizeDelta = Vector2.zero;
+        selectionBox.gameObject.SetActive(true);
+        startingMousePosition = Mouse.current.position.ReadValue();
+        addedUnits.Clear();
+    }
+
+    private void DeselectAllUnits()
+    {
+        ISelectable[] currentlySelectedUnits = selectedUnits.ToArray();
+        foreach (ISelectable selectable in currentlySelectedUnits)
+        {
+            selectable.Deselect();
+        }
+    }
+
+    private Bounds ResizeSelectiobBox()
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+        float width = mousePosition.x - startingMousePosition.x;
+        float height = mousePosition.y - startingMousePosition.y;
+
+        selectionBox.anchoredPosition = startingMousePosition + new Vector2(width / 2, height / 2);
+        selectionBox.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
+
+        return new Bounds(selectionBox.anchoredPosition, selectionBox.sizeDelta);
     }
 
     private void HandleRightClick()
     {
-        if (selectedUnit ==  null || selectedUnit is not IMoveable moveable) return;
+        if (selectedUnits.Count == 0) return;
 
 
         Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (Mouse.current.rightButton.wasReleasedThisFrame 
+        if (Mouse.current.rightButton.wasReleasedThisFrame
             && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, floorLayers))
         {
-            moveable.MoveTo(hit.point);
+            selectedUnits.ForEach(selectable =>
+            {
+                if (selectable is IMoveable moveable)
+                {
+                    moveable.MoveTo(hit.point);
+                }
+            });
         }
 
 
@@ -62,20 +159,11 @@ public class PlayerInput : MonoBehaviour
 
         Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
-        {
-            if (selectedUnit != null)
-            {
-                selectedUnit.Deselect();
-                selectedUnit = null;
-            }
 
-            if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayer)
-            && hit.collider.TryGetComponent(out ISelectable selectable))
-            {
-                selectable.Select();
-                selectedUnit = selectable;
-            }
+        if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayer)
+        && hit.collider.TryGetComponent(out ISelectable selectable))
+        {
+            selectable.Select();
         }
     }
 
@@ -123,25 +211,16 @@ public class PlayerInput : MonoBehaviour
 
     }
 
-    private bool ShouldSetRotationStartTime()
-    {
-        return Keyboard.current.pageUpKey.wasPressedThisFrame
+    private bool ShouldSetRotationStartTime() => Keyboard.current.pageUpKey.wasPressedThisFrame
             || Keyboard.current.pageDownKey.wasPressedThisFrame
             || Keyboard.current.pageUpKey.wasReleasedThisFrame
             || Keyboard.current.pageDownKey.wasReleasedThisFrame;
-
-    }
-
     private void HandleZooming()
     {
-        if(ShouldSetZoomStartTime())
+        if (ShouldSetZoomStartTime())
         {
             zoomStartTime = Time.time;
         }
-
-
-
-
         float zoomTime = Mathf.Clamp01((Time.time - zoomStartTime) * cameraConfig.ZoomSpeed);
         Vector3 targetFollowOffset;
 
@@ -169,11 +248,7 @@ public class PlayerInput : MonoBehaviour
          );
     }
 
-    private bool ShouldSetZoomStartTime()
-    {
-        return Keyboard.current.endKey.wasPressedThisFrame || Keyboard.current.endKey.wasReleasedThisFrame;
-    }
-
+    private bool ShouldSetZoomStartTime() => Keyboard.current.endKey.wasPressedThisFrame || Keyboard.current.endKey.wasReleasedThisFrame;
     private void HandlePanning()
     {
         Vector2 moveAmount = GetKeyboardMoveAmount();
@@ -231,5 +306,12 @@ public class PlayerInput : MonoBehaviour
             moveAmount.y -= cameraConfig.KeyboardPanSpeed;
         }
         return moveAmount;
+    }
+
+    private void OnDestroy()
+    {
+        Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
+        Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
+        Bus<UnitSpawnEvent>.OnEvent -= HandleUnitSpawn;
     }
 }
