@@ -52,7 +52,14 @@ public class PlayerInput : MonoBehaviour
     private void HandleUnitSpawn(UnitSpawnEvent evt) => aliveUnits.Add(evt.Unit);
     private void HandleUnitSelected(UnitSelectedEvent evt) => selectedUnits.Add(evt.Unit);
     private void HandleUnitDeselected(UnitDeselectedEvent evt) => selectedUnits.Remove(evt.Unit);
-    private void HandleActionSelected(ActionSelectedEvent evt) => activeAction = evt.Action;
+    private void HandleActionSelected(ActionSelectedEvent evt)
+    {
+        activeAction = evt.Action;
+        if (!activeAction.RequiresClickToActivate)
+        {
+            ActivateAction(new RaycastHit());
+        }
+    }
 
     private void Update()
     {
@@ -80,21 +87,21 @@ public class PlayerInput : MonoBehaviour
             HandleMouseUp();
         }
     }
-
     private void HandleMouseUp()
     {
-        if (activeAction == null && !Keyboard.current.shiftKey.isPressed)
+        if (!wasMouseDownOnUI && activeAction == null && !Keyboard.current.shiftKey.isPressed)
         {
             DeselectAllUnits();
         }
-        HandleLeftClick();
 
+        HandleLeftClick();
         foreach (AbstractUnit unit in addedUnits)
         {
             unit.Select();
         }
         selectionBox.gameObject.SetActive(false);
     }
+
 
     private void HandleMouseDrag()
     {
@@ -162,13 +169,9 @@ public class PlayerInput : MonoBehaviour
                     abstractUnits.Add(unit);
                 }
             }
-
-
-
             for (int i = 0; i < abstractUnits.Count; i++)
             {
                 CommandContext context = new CommandContext(abstractUnits[i], hit, i);
-
 
                 foreach (ICommand command in abstractUnits[i].AvailableCommands)
                 {
@@ -180,8 +183,6 @@ public class PlayerInput : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     private void HandleLeftClick()
@@ -189,7 +190,6 @@ public class PlayerInput : MonoBehaviour
         if (camera == null) return;
 
         Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
 
         if (activeAction == null
             && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayer)
@@ -199,20 +199,25 @@ public class PlayerInput : MonoBehaviour
         }
         else if (activeAction != null
             && !EventSystem.current.IsPointerOverGameObject()
-             && Physics.Raycast(cameraRay, out hit, float.MaxValue, floorLayers))
+            && Physics.Raycast(cameraRay, out hit, float.MaxValue, floorLayers))
         {
-            List<AbstractUnit> abstractUnits = selectedUnits
-                .Where((unit) => unit is AbstractUnit)
-                .Cast<AbstractUnit>()
-                .ToList();
-            for (int i = 0; i < abstractUnits.Count; i++)
-            {
-                CommandContext context = new(abstractUnits[i], hit, i);
-                activeAction.Handle(context);
-            }
-
-            activeAction = null;
+            ActivateAction(hit);
         }
+    }
+
+    private void ActivateAction(RaycastHit hit)
+    {
+        List<AbstractCommandable> abstractCommandables = selectedUnits
+                            .Where((unit) => unit is AbstractCommandable)
+                            .Cast<AbstractCommandable>()
+                            .ToList();
+        for (int i = 0; i < abstractCommandables.Count; i++)
+        {
+            CommandContext context = new(abstractCommandables[i], hit, i);
+            activeAction.Handle(context);
+        }
+
+        activeAction = null;
     }
 
     private void HandleRotation()

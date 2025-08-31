@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Worker
   m_EditorClassIdentifier: Assembly-CSharp::UnitSO
   <Health>k__BackingField: 50
+  <Prefab>k__BackingField: {fileID: 2011376057997075136, guid: 934085f343c025d4fb9e83a3698c92f5, type: 3}
+  <BuildTime>k__BackingField: 5

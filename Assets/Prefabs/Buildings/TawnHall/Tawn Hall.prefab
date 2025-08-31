@@ -111,6 +111,8 @@ MonoBehaviour:
   decalProjector: {fileID: 1267491250412925344}
   <CurrentHealth>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
+  <AvailableCommands>k__BackingField:
+  - {fileID: 11400000, guid: d99086838f4c24e48a570ba588b16fe2, type: 2}
   UnitSO: {fileID: 11400000, guid: 39571c4d6e660fe478f8162fd2cbbccb, type: 2}
 --- !u!65 &836464012312321466
 BoxCollider:
