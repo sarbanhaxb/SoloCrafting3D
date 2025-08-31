@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
@@ -16,6 +18,9 @@ public class PlayerInput : MonoBehaviour
 
     private Vector2 startingMousePosition;
 
+
+    private ActionBase activeAction;
+    private bool wasMouseDownOnUI;
     private CinemachineFollow cinemachineFollow;
     private float zoomStartTime;
     private float rotationStartTime;
@@ -39,11 +44,15 @@ public class PlayerInput : MonoBehaviour
         Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
         Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
         Bus<UnitSpawnEvent>.OnEvent += HandleUnitSpawn;
+        Bus<ActionSelectedEvent>.OnEvent += HandleActionSelected;
     }
+
+
 
     private void HandleUnitSpawn(UnitSpawnEvent evt) => aliveUnits.Add(evt.Unit);
     private void HandleUnitSelected(UnitSelectedEvent evt) => selectedUnits.Add(evt.Unit);
     private void HandleUnitDeselected(UnitDeselectedEvent evt) => selectedUnits.Remove(evt.Unit);
+    private void HandleActionSelected(ActionSelectedEvent evt) => activeAction = evt.Action;
 
     private void Update()
     {
@@ -74,7 +83,7 @@ public class PlayerInput : MonoBehaviour
 
     private void HandleMouseUp()
     {
-        if (!Keyboard.current.shiftKey.isPressed)
+        if (activeAction == null && !Keyboard.current.shiftKey.isPressed)
         {
             DeselectAllUnits();
         }
@@ -89,6 +98,8 @@ public class PlayerInput : MonoBehaviour
 
     private void HandleMouseDrag()
     {
+        if (activeAction != null || wasMouseDownOnUI) return;
+
         Bounds selectionBoxBounds = ResizeSelectiobBox();
         foreach (AbstractUnit unit in aliveUnits)
         {
@@ -107,6 +118,7 @@ public class PlayerInput : MonoBehaviour
         selectionBox.gameObject.SetActive(true);
         startingMousePosition = Mouse.current.position.ReadValue();
         addedUnits.Clear();
+        wasMouseDownOnUI = EventSystem.current.IsPointerOverGameObject();
     }
 
     private void DeselectAllUnits()
@@ -179,10 +191,27 @@ public class PlayerInput : MonoBehaviour
         Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
 
-        if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayer)
-        && hit.collider.TryGetComponent(out ISelectable selectable))
+        if (activeAction == null
+            && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayer)
+            && hit.collider.TryGetComponent(out ISelectable selectable))
         {
             selectable.Select();
+        }
+        else if (activeAction != null
+            && !EventSystem.current.IsPointerOverGameObject()
+             && Physics.Raycast(cameraRay, out hit, float.MaxValue, floorLayers))
+        {
+            List<AbstractUnit> abstractUnits = selectedUnits
+                .Where((unit) => unit is AbstractUnit)
+                .Cast<AbstractUnit>()
+                .ToList();
+            for (int i = 0; i < abstractUnits.Count; i++)
+            {
+                CommandContext context = new(abstractUnits[i], hit, i);
+                activeAction.Handle(context);
+            }
+
+            activeAction = null;
         }
     }
 
@@ -332,5 +361,6 @@ public class PlayerInput : MonoBehaviour
         Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
         Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
         Bus<UnitSpawnEvent>.OnEvent -= HandleUnitSpawn;
+        Bus<ActionSelectedEvent>.OnEvent -= HandleActionSelected;
     }
 }

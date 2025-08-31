@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c14e8e4698ac64fbf3aafe130d927f, type: 3}
   m_Name: TawnHall
   m_EditorClassIdentifier: Assembly-CSharp::UnitSO
+  <Health>k__BackingField: 500
