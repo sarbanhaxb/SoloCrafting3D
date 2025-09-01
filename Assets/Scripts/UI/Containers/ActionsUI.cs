@@ -5,44 +5,24 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ActionsUI : MonoBehaviour
+public class ActionsUI : MonoBehaviour, IUIElement<HashSet<AbstractCommandable>>
 {
     [SerializeField] private UIActionButton[] ActionButtons;
-    private HashSet<AbstractCommandable> selectedUnits = new(12);
 
-    private void Awake()
+    public void EnableFor(HashSet<AbstractCommandable> selectedUnits)
     {
-        Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
-        Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
+        RefreshButtons(selectedUnits);
     }
 
-    private void Start()
+    public void Disable()
     {
-        foreach (UIActionButton actionButton in ActionButtons)
+        foreach (UIActionButton button in ActionButtons)
         {
-            actionButton.Disable();
+            button.Disable();
         }
     }
 
-    private void HandleUnitSelected(UnitSelectedEvent evt)
-    {
-        if (evt.Unit is AbstractCommandable commandable)
-        {
-            selectedUnits.Add(commandable);
-            RefreshButtons();
-        }
-    }
-
-    private void HandleUnitDeselected(UnitDeselectedEvent evt)
-    {
-        if (evt.Unit is AbstractCommandable commandable)
-        {
-            selectedUnits.Remove(commandable);
-            RefreshButtons();
-        }
-    }
-
-    private void RefreshButtons()
+    private void RefreshButtons(HashSet<AbstractCommandable> selectedUnits)
     {
         HashSet<ActionBase> availableCommands = new(9);
 
@@ -69,11 +49,5 @@ public class ActionsUI : MonoBehaviour
     private UnityAction HandleClick(ActionBase action)
     {
         return () => Bus<ActionSelectedEvent>.Raise(new ActionSelectedEvent(action));
-    }
-
-    private void OnDestroy()
-    {
-        Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
-        Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
     }
 }

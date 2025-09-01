@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof(Button))]
-public class UIActionButton : MonoBehaviour
+public class UIActionButton : MonoBehaviour, IUIElement<ActionBase, UnityAction>
 {
     [SerializeField] private Image icon;
     private Button button;
