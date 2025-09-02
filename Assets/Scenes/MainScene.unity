@@ -5881,6 +5881,7 @@ GameObject:
   - component: {fileID: 1261490278}
   - component: {fileID: 1261490277}
   - component: {fileID: 1261490276}
+  - component: {fileID: 1261490280}
   m_Layer: 5
   m_Name: Runtime UI UGUI
   m_TagString: Untagged
@@ -5972,6 +5973,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1261490280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261490275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae414564d5d966488d01afbc6d2a939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RuntimeUI
+  actionsUI: {fileID: 1272453947}
 --- !u!1 &1263752905
 GameObject:
   m_ObjectHideFlags: 0
