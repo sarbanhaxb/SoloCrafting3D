@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuildingBuildingUI : MonoBehaviour, IUIElement<BaseBuilding>
 {
+    [SerializeField] private UIBuildQueueButton[] unitButtons;
     [SerializeField] private ProgressBar progressBar;
 
     private Coroutine buildCoroutine;
@@ -11,12 +12,29 @@ public class BuildingBuildingUI : MonoBehaviour, IUIElement<BaseBuilding>
 
     public void EnableFor(BaseBuilding item)
     {
+        progressBar.SetProgress(0);
         gameObject.SetActive(true);
         building = item;
         building.OnQueueUpdated += HandleQueueUpdated;
+        SetupUnitButtons();
 
         buildCoroutine = StartCoroutine(UpdateUnitProgress());
     }
+
+    private void SetupUnitButtons()
+    {
+        int i = 0;
+        for (; i < building.QueueSize; i++)
+        {
+            int index = i;
+            unitButtons[i].EnableFor(building.Queue[i], () => building.CancelBuildingUnit(index));
+        }
+        for (; i < unitButtons.Length; i++)
+        {
+            unitButtons[i].Disable();
+        }
+    }
+
 
     private IEnumerator UpdateUnitProgress()
     {
@@ -30,6 +48,8 @@ public class BuildingBuildingUI : MonoBehaviour, IUIElement<BaseBuilding>
             progressBar.SetProgress(progress);
             yield return null;
         }
+
+        buildCoroutine = null;
     }
 
     private void HandleQueueUpdated(UnitSO[] unitsInQueue)
@@ -38,6 +58,7 @@ public class BuildingBuildingUI : MonoBehaviour, IUIElement<BaseBuilding>
         {
             buildCoroutine = StartCoroutine(UpdateUnitProgress());
         }
+        SetupUnitButtons();
     }
 
     public void Disable()

@@ -6,14 +6,15 @@ using UnityEngine.Rendering.Universal;
 public class BaseBuilding : AbstractCommandable
 {
     public int QueueSize => buildingQueue.Count;
+    public UnitSO[] Queue => buildingQueue.ToArray();
     [field: SerializeField] public float CurrentQueueStartTime { get; private set; }
     [field: SerializeField] public UnitSO BuildingUnit { get; private set; }
 
     public delegate void QueueUpdatedEvent(UnitSO[] unitsInQueue);
     public event QueueUpdatedEvent OnQueueUpdated;
 
+    private List<UnitSO> buildingQueue = new(MAX_QUEUE_SIZE);
     private const int MAX_QUEUE_SIZE = 5;
-    private Queue<UnitSO> buildingQueue = new(MAX_QUEUE_SIZE);
 
 
     public void BuildUnit(UnitSO unit)
@@ -25,7 +26,7 @@ public class BaseBuilding : AbstractCommandable
         }
 
 
-        buildingQueue.Enqueue(unit);
+        buildingQueue.Add(unit);
         if (buildingQueue.Count == 1)
         {
             StartCoroutine(DoBuildUnits());
@@ -36,18 +37,47 @@ public class BaseBuilding : AbstractCommandable
         }
     }
 
+    public void CancelBuildingUnit(int index)
+    {
+        if (index < 0 || index >= buildingQueue.Count)
+        {
+            Debug.LogError("Attempting to cancel building a unit outside the bounds of the queue!");
+            return;
+        }
+
+        buildingQueue.RemoveAt(index);
+        if (index == 0)
+        {
+            StopAllCoroutines();
+
+            if (buildingQueue.Count > 0)
+            {
+                StartCoroutine(DoBuildUnits());
+            }
+            else
+            {
+                OnQueueUpdated?.Invoke(buildingQueue.ToArray());
+            }
+        }
+        else
+        {
+            OnQueueUpdated?.Invoke(buildingQueue.ToArray());
+        }
+    }
+
+
     private IEnumerator DoBuildUnits()
     {
         while (buildingQueue.Count > 0)
         {
-            BuildingUnit = buildingQueue.Peek();
+            BuildingUnit = buildingQueue[0];
             CurrentQueueStartTime = Time.time;
             OnQueueUpdated?.Invoke(buildingQueue.ToArray());
 
             yield return new WaitForSeconds(BuildingUnit.BuildTime);
 
             Instantiate(BuildingUnit.Prefab, transform.position, Quaternion.identity);
-            buildingQueue.Dequeue();
+            buildingQueue.RemoveAt(0);
         }
 
         OnQueueUpdated?.Invoke(buildingQueue.ToArray());

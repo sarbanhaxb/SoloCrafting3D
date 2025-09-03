@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildUnitCommand
   <Icon>k__BackingField: {fileID: 21300000, guid: 1b4da93b4ec70014da57acf78967748c, type: 3}
   <Slot>k__BackingField: 0
-  <RequiresClickToActivate>k__BackingField: 1
+  <RequiresClickToActivate>k__BackingField: 0
   <Unit>k__BackingField: {fileID: 11400000, guid: 57ab9220e7ce92247bf79f13e1732f2e, type: 2}
