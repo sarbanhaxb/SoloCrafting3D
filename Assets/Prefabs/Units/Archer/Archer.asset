@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c14e8e4698ac64fbf3aafe130d927f, type: 3}
-  m_Name: Worker
+  m_Name: Archer
   m_EditorClassIdentifier: Assembly-CSharp::UnitSO
-  <Health>k__BackingField: 50
-  <Prefab>k__BackingField: {fileID: 2011376057997075136, guid: 934085f343c025d4fb9e83a3698c92f5, type: 3}
-  <BuildTime>k__BackingField: 5
-  <Icon>k__BackingField: {fileID: 21300000, guid: 1b4da93b4ec70014da57acf78967748c, type: 3}
+  <Health>k__BackingField: 150
+  <Prefab>k__BackingField: {fileID: 5099112963183291023, guid: 2b71b7fb133c0034dbd7d98e5244fac1, type: 3}
+  <BuildTime>k__BackingField: 20
+  <Icon>k__BackingField: {fileID: 21300000, guid: 482de327674e86e4d8747d0e751894a0, type: 3}

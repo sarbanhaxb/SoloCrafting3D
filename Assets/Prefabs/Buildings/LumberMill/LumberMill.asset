@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c14e8e4698ac64fbf3aafe130d927f, type: 3}
-  m_Name: Worker
+  m_Name: LumberMill
   m_EditorClassIdentifier: Assembly-CSharp::UnitSO
-  <Health>k__BackingField: 50
-  <Prefab>k__BackingField: {fileID: 2011376057997075136, guid: 934085f343c025d4fb9e83a3698c92f5, type: 3}
-  <BuildTime>k__BackingField: 5
-  <Icon>k__BackingField: {fileID: 21300000, guid: 1b4da93b4ec70014da57acf78967748c, type: 3}
+  <Health>k__BackingField: 200
+  <Prefab>k__BackingField: {fileID: 5434718382515521483, guid: 41d8c9e5f9f7b0c4599e5b1b3ee5f2e9, type: 3}
+  <BuildTime>k__BackingField: 15
+  <Icon>k__BackingField: {fileID: 21300000, guid: 32f51acb9014c7a4fa184ea659125aea, type: 3}
