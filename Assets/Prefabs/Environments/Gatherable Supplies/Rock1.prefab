@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 186282139493641675}
   - component: {fileID: 772410153170975407}
   - component: {fileID: 929114928577245112}
+  - component: {fileID: 7351610338837142025}
   m_Layer: 0
   m_Name: Rock1
   m_TagString: Untagged
@@ -107,3 +108,16 @@ MonoBehaviour:
   m_Center: {x: 0, y: 0, z: 0}
   m_Area: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &7351610338837142025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013759136026802183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b17abd0f9c9864cba4507c313465bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GatherableSupply
+  <Supply>k__BackingField: {fileID: 11400000, guid: 86ec42aac8cef8647a9070baf7dd3778, type: 2}
