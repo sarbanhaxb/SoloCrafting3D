@@ -1848,7 +1848,7 @@ Transform:
   m_Children:
   - {fileID: 538997877862496733}
   m_Father: {fileID: 5477688126675894685}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.8059785, y: -3.2616646, z: 159.5269}
 --- !u!1 &1118574102265210172
 GameObject:
   m_ObjectHideFlags: 0
@@ -4920,6 +4920,7 @@ GameObject:
   - component: {fileID: 4450447338979848833}
   - component: {fileID: 1405387644738457246}
   - component: {fileID: 2523995686349002719}
+  - component: {fileID: 1133993481062727525}
   m_Layer: 6
   m_Name: Worker
   m_TagString: Unit
@@ -5061,11 +5062,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1392d4d1a1ca0c49abc9f72eb3d2600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Worker
-  decalProjector: {fileID: 8983910009072643283}
   <CurrentHealth>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
   <AvailableCommands>k__BackingField:
   - {fileID: 11400000, guid: 4f9e3e5b83359b643bdc6ceee7f75558, type: 2}
+  decalProjector: {fileID: 8983910009072643283}
   UnitSO: {fileID: 11400000, guid: 57ab9220e7ce92247bf79f13e1732f2e, type: 2}
 --- !u!136 &1405387644738457246
 CapsuleCollider:
@@ -5117,6 +5118,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1133993481062727525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011376057997075136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -3941287358013138110, guid: 8e987818194c1034b9fda2a04d24f7ea, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 372691669768470608
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 372691669768470608
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 2011376057997075136}
 --- !u!1 &2062328333150131535
 GameObject:
   m_ObjectHideFlags: 0
