@@ -13,12 +13,14 @@ public abstract class AbstractUnit : AbstractCommandable, IMoveable
     {
         agent = GetComponent<NavMeshAgent>();
         agentGraph = GetComponent<BehaviorGraphAgent>();
+        MoveTo(transform.position);
     }
 
     protected override void Start()
     {
         base.Start();
         Bus<UnitSpawnEvent>.Raise(new UnitSpawnEvent(this));
+        MoveTo(transform.position);
     }
 
 
