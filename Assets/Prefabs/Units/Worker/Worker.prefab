@@ -5066,6 +5066,7 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 0
   <AvailableCommands>k__BackingField:
   - {fileID: 11400000, guid: 4f9e3e5b83359b643bdc6ceee7f75558, type: 2}
+  - {fileID: 11400000, guid: eaadb210a443a1e41a41f326dcac0b7d, type: 2}
   decalProjector: {fileID: 8983910009072643283}
   UnitSO: {fileID: 11400000, guid: 57ab9220e7ce92247bf79f13e1732f2e, type: 2}
 --- !u!136 &1405387644738457246

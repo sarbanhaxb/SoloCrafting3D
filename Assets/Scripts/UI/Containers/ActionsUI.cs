@@ -7,8 +7,7 @@ using UnityEngine.Events;
 
 public class ActionsUI : MonoBehaviour, IUIElement<HashSet<AbstractCommandable>>
 {
-    [SerializeField] private UIActionButton[] ActionButtons;
-
+    [SerializeField] private UIActionButton[] actionButtons;
     public void EnableFor(HashSet<AbstractCommandable> selectedUnits)
     {
         RefreshButtons(selectedUnits);
@@ -16,7 +15,7 @@ public class ActionsUI : MonoBehaviour, IUIElement<HashSet<AbstractCommandable>>
 
     public void Disable()
     {
-        foreach (UIActionButton button in ActionButtons)
+        foreach (UIActionButton button in actionButtons)
         {
             button.Disable();
         }
@@ -31,17 +30,17 @@ public class ActionsUI : MonoBehaviour, IUIElement<HashSet<AbstractCommandable>>
             availableCommands.AddRange(commandable.AvailableCommands);
         }
 
-        for (int i = 0; i < ActionButtons.Length; i++)
+        for (int i = 0; i < actionButtons.Length; i++)
         {
             ActionBase actionForSlot = availableCommands.Where(action => action.Slot == i).FirstOrDefault();
 
             if (actionForSlot != null)
             {
-                ActionButtons[i].EnableFor(actionForSlot, HandleClick(actionForSlot));
+                actionButtons[i].EnableFor(actionForSlot, HandleClick(actionForSlot));
             }
             else
             {
-                ActionButtons[i].Disable();
+                actionButtons[i].Disable();
             }
         }
     }
