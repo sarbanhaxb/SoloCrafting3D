@@ -7,17 +7,17 @@ using UnityEngine.Rendering.Universal;
 public abstract class AbstractUnit : AbstractCommandable, IMoveable
 {
 
-    private const string TARGET_LOCATION = "TargetLocation";
-    private const string COMMAND = "Command";
+    protected const string TARGET_LOCATION = "TargetLocation";
+    protected const string COMMAND = "Command";
 
     public float AgentRadius => agent.radius;
     private NavMeshAgent agent;
-    private BehaviorGraphAgent agentGraph;
+    protected BehaviorGraphAgent graphAgent;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        agentGraph = GetComponent<BehaviorGraphAgent>();
-        agentGraph.SetVariableValue(COMMAND, UnitCommands.Stop);
+        graphAgent = GetComponent<BehaviorGraphAgent>();
+        graphAgent.SetVariableValue(COMMAND, UnitCommands.Stop);
     }
 
     protected override void Start()
@@ -29,12 +29,12 @@ public abstract class AbstractUnit : AbstractCommandable, IMoveable
 
     public void MoveTo(Vector3 position)
     {
-        agentGraph.SetVariableValue(TARGET_LOCATION, position);
-        agentGraph.SetVariableValue(COMMAND, UnitCommands.Move);
+        graphAgent.SetVariableValue(TARGET_LOCATION, position);
+        graphAgent.SetVariableValue(COMMAND, UnitCommands.Move);
     }
 
     public void Stop()
     {
-        agentGraph.SetVariableValue(COMMAND, UnitCommands.Stop);
+        graphAgent.SetVariableValue(COMMAND, UnitCommands.Stop);
     }
 }
