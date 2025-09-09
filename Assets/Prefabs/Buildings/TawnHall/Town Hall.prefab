@@ -108,12 +108,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a3490ec54c6274d91fea4de82b206f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TownHall
-  decalProjector: {fileID: 1267491250412925344}
   <CurrentHealth>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
   <AvailableCommands>k__BackingField:
   - {fileID: 11400000, guid: d99086838f4c24e48a570ba588b16fe2, type: 2}
-  UnitSO: {fileID: 11400000, guid: 39571c4d6e660fe478f8162fd2cbbccb, type: 2}
+  decalProjector: {fileID: 1267491250412925344}
+  <UnitSO>k__BackingField: {fileID: 11400000, guid: 39571c4d6e660fe478f8162fd2cbbccb, type: 2}
+  <CurrentQueueStartTime>k__BackingField: 0
+  <BuildingUnit>k__BackingField: {fileID: 0}
 --- !u!65 &836464012312321466
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -173,7 +175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c5f43a47e4b64c14da6e0081f639fdd3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c5f43a47e4b64c14da6e0081f639fdd3, type: 3}
       propertyPath: m_LocalPosition.z

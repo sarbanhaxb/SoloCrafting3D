@@ -5019,7 +5019,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f5a5df21e2ce72749aab436d5667e57b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -5042,11 +5042,11 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 0.1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -5069,7 +5069,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eaadb210a443a1e41a41f326dcac0b7d, type: 2}
   - {fileID: 11400000, guid: e1e47622352a2264296ab17f4b1ce44a, type: 2}
   decalProjector: {fileID: 8983910009072643283}
-  UnitSO: {fileID: 11400000, guid: 57ab9220e7ce92247bf79f13e1732f2e, type: 2}
+  <UnitSO>k__BackingField: {fileID: 11400000, guid: 57ab9220e7ce92247bf79f13e1732f2e, type: 2}
 --- !u!136 &1405387644738457246
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5090,9 +5090,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.1465294
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5732647, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &2523995686349002719
 Rigidbody:
   m_ObjectHideFlags: 0

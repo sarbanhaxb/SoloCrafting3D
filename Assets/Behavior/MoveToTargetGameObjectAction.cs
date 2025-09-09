@@ -6,11 +6,11 @@ using Unity.Properties;
 using UnityEngine.AI;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Move to Target Location", story: "[Agent] moves to [TargetLocation] .", category: "Action/Navigation", id: "d3d4e1c00c6f415e3d5fffc9abb3a81d")]
-public partial class MoveToTargetLocationAction : Action
+[NodeDescription(name: "Move to Target GameObject", story: "[Agent] moves to [TargetGameObject] .", category: "Action/Navigation", id: "98c9196703f061e908867d3d332a6da1")]
+public partial class MoveToTargetGameObjectAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
-    [SerializeReference] public BlackboardVariable<Vector3> TargetLocation;
+    [SerializeReference] public BlackboardVariable<GameObject> TargetGameObject;
 
     private NavMeshAgent agent;
 
@@ -21,13 +21,13 @@ public partial class MoveToTargetLocationAction : Action
             return Status.Failure;
         }
 
-        if (Vector3.Distance(agent.transform.position, TargetLocation.Value) <= agent.stoppingDistance)
+        Vector3 targetPosition = TargetGameObject.Value.transform.position;
+        if (Vector3.Distance(agent.transform.position, targetPosition) <= agent.stoppingDistance)
         {
             return Status.Success;
         }
 
-        agent.SetDestination(TargetLocation.Value);
-
+        agent.SetDestination(targetPosition);
         return Status.Running;
     }
 
@@ -37,7 +37,9 @@ public partial class MoveToTargetLocationAction : Action
         {
             return Status.Success;
         }
+
         return Status.Running;
     }
+
 }
 
