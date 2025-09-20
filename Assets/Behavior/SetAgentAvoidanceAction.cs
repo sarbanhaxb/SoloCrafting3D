@@ -14,7 +14,7 @@ public partial class SetAgentAvoidanceAction : Action
 
     protected override Status OnStart()
     {
-        if (Agent.Value.TryGetComponent(out NavMeshAgent agent) || AvoidanceQuality > 4 || AvoidanceQuality < 0)
+        if (!Agent.Value.TryGetComponent(out NavMeshAgent agent) || AvoidanceQuality > 4 || AvoidanceQuality < 0)
         {
             return Status.Failure;
         }

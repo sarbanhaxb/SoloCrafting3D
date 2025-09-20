@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SupplySO", menuName = "Supply", order = 5)]
+[CreateAssetMenu(fileName = "Supply", menuName = "Supply", order = 5)]
 public class SupplySO : ScriptableObject
 {
     [field: SerializeField] public int MaxAmount { get; private set; } = 1500;

@@ -16,21 +16,22 @@ public partial class FindClosestWarehouseAction : Action
 
     protected override Status OnStart()
     {
-        Collider[] colliders = Physics.OverlapSphere(Unit.Value.transform.position, SearchRadius, LayerMask.GetMask("Buildings"));
+        Collider[] colliders = Physics.OverlapSphere(Unit.Value.transform.position, SearchRadius.Value, LayerMask.GetMask("Buildings"));
 
         List<BaseBuilding> nearbyWarehouses = new();
         foreach (Collider collider in colliders)
         {
-            if (collider.TryGetComponent(out BaseBuilding building) && building.UnitSO.Equals(WarehouseBuilding.Value))
+            if (collider.TryGetComponent(out BaseBuilding building)
+                    && building.UnitSO.Equals(WarehouseBuilding.Value))
             {
                 nearbyWarehouses.Add(building);
             }
         }
-
         if (nearbyWarehouses.Count == 0)
         {
             return Status.Failure;
         }
+
         Warehouse.Value = nearbyWarehouses[0].gameObject;
 
         return Status.Success;
