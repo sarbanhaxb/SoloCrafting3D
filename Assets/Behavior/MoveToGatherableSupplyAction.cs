@@ -14,12 +14,12 @@ public partial class MoveToGatherableSupplyAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<GatherableSupply> Supply;
-    [SerializeReference] public BlackboardVariable<float> SearchRadius = new(15f);
+    [SerializeReference] public BlackboardVariable<float> SearchRadius = new(7f);
 
     private NavMeshAgent agent;
+    private Animator animator;
     private LayerMask suppliesMask;
     private SupplySO supplySO;
-    private Animator animator;
 
     protected override Status OnStart()
     {
@@ -33,14 +33,13 @@ public partial class MoveToGatherableSupplyAction : Action
         animator = agent.GetComponentInChildren<Animator>();
 
         Vector3 targetPosition = GetTargetPosition();
-
         agent.SetDestination(targetPosition);
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-        if(animator != null)
+        if (animator != null)
         {
             animator.SetFloat(SPEED, agent.velocity.magnitude);
         }
@@ -103,9 +102,6 @@ public partial class MoveToGatherableSupplyAction : Action
 
         return true;
     }
-
-
-
     private Collider[] FindNearbyNotBusyColliders()
     {
         return Physics.OverlapSphere(
@@ -118,7 +114,6 @@ public partial class MoveToGatherableSupplyAction : Action
                 && supply.Supply.Equals(Supply.Value.Supply)
         ).ToArray();
     }
-
     private Vector3 GetTargetPosition()
     {
         Vector3 targetPosition;
@@ -133,5 +128,4 @@ public partial class MoveToGatherableSupplyAction : Action
 
         return targetPosition;
     }
-
 }

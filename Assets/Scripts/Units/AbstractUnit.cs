@@ -1,4 +1,5 @@
 using Unity.Behavior;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;

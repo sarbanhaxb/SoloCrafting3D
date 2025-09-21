@@ -12,7 +12,6 @@ public partial class MoveToTargetLocationAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<Vector3> TargetLocation;
-
     private NavMeshAgent agent;
     private Animator animator;
 

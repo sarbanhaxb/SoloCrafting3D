@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Graph: {fileID: -3941287358013138110, guid: 8e987818194c1034b9fda2a04d24f7ea, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 372691825942593796
+  - rid: 372692025121702167
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -88,6 +89,14 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 4978260085514464991}
+    - rid: 372692025121702167
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3839559753478197566
+          m_Value1: 4178067577067224295
+        Name: Warehouse
+        m_Value: {fileID: 0}
 --- !u!114 &5371373226747284041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +278,18 @@ PrefabInstance:
     - target: {fileID: 408984, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558518706726105154, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 4.0061693
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558518706726105154, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 10.348757
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558518706726105154, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 169.25363
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5997459233353443502, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}

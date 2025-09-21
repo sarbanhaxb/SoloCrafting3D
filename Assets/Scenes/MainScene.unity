@@ -8104,7 +8104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3130521983163109308, guid: 177d64c10660a8e469e2947314666489, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.9245872
+      value: 3.73
       objectReference: {fileID: 0}
     - target: {fileID: 3130521983163109308, guid: 177d64c10660a8e469e2947314666489, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9187,7 +9187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6998740340658555219, guid: e4799dee6f2d7e24f891928c8da90245, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.931057
+      value: 2.06
       objectReference: {fileID: 0}
     - target: {fileID: 6998740340658555219, guid: e4799dee6f2d7e24f891928c8da90245, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9248,7 +9248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4432213705888686511, guid: 593b7e50ae41fac43b2e9f0468c48c0e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 4.45
       objectReference: {fileID: 0}
     - target: {fileID: 4432213705888686511, guid: 593b7e50ae41fac43b2e9f0468c48c0e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10181,18 +10181,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4957056310788674959, guid: e91055eb8f3a35d42b4ed3bbd68bfe8e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 4.0061693
-      objectReference: {fileID: 0}
-    - target: {fileID: 4957056310788674959, guid: e91055eb8f3a35d42b4ed3bbd68bfe8e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 10.348757
-      objectReference: {fileID: 0}
-    - target: {fileID: 4957056310788674959, guid: e91055eb8f3a35d42b4ed3bbd68bfe8e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 169.25363
-      objectReference: {fileID: 0}
     - target: {fileID: 4978260085514464991, guid: e91055eb8f3a35d42b4ed3bbd68bfe8e, type: 3}
       propertyPath: m_Name
       value: Worker

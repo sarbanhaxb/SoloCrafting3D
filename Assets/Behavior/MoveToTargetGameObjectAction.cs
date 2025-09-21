@@ -47,7 +47,6 @@ public partial class MoveToTargetGameObjectAction : Action
         {
             animator.SetFloat(SPEED, agent.velocity.magnitude);
         }
-
         return Status.Running;
     }
 

@@ -40,13 +40,12 @@ public partial class GatherSuppliesAction : Action
         {
             return Status.Success;
         }
-
         return Status.Running;
     }
 
     protected override void OnEnd()
     {
-        if(animator != null)
+        if (animator != null)
         {
             animator.SetBool(IS_GATHERING, false);
         }

@@ -11,12 +11,15 @@ public partial class FindClosestWarehouseAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Unit;
     [SerializeReference] public BlackboardVariable<GameObject> Warehouse;
-    [SerializeReference] public BlackboardVariable<float> SearchRadius = new(10);
+    [SerializeReference] public BlackboardVariable<float> SearchRadius = new(20f);
     [SerializeReference] public BlackboardVariable<UnitSO> WarehouseBuilding;
 
     protected override Status OnStart()
     {
-        Collider[] colliders = Physics.OverlapSphere(Unit.Value.transform.position, SearchRadius.Value, LayerMask.GetMask("Buildings"));
+        Collider[] colliders = Physics.OverlapSphere(Unit.Value.transform.position,
+            SearchRadius.Value, 
+            LayerMask.GetMask("Buildings"));
+
 
         List<BaseBuilding> nearbyWarehouses = new();
         foreach (Collider collider in colliders)
@@ -29,11 +32,13 @@ public partial class FindClosestWarehouseAction : Action
         }
         if (nearbyWarehouses.Count == 0)
         {
+            Debug.Log("NOT FOUND CLOSEST WAREHOUSE");
             return Status.Failure;
         }
 
         Warehouse.Value = nearbyWarehouses[0].gameObject;
 
+        Debug.Log("FOUND CLOSEST WAREHOUSE IS SUCCESS");
         return Status.Success;
     }
 }
