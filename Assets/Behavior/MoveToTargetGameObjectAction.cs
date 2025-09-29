@@ -38,7 +38,7 @@ public partial class MoveToTargetGameObjectAction : Action
 
     protected override Status OnUpdate()
     {
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
         {
             return Status.Success;
         }

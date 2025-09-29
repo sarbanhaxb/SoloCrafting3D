@@ -32,13 +32,13 @@ public partial class FindClosestWarehouseAction : Action
         }
         if (nearbyWarehouses.Count == 0)
         {
-            Debug.Log("NOT FOUND CLOSEST WAREHOUSE");
+            Debug.Log($"{ToString()}: Failure");
             return Status.Failure;
         }
 
         Warehouse.Value = nearbyWarehouses[0].gameObject;
 
-        Debug.Log("FOUND CLOSEST WAREHOUSE IS SUCCESS");
+        Debug.Log($"{ToString()}: Success");
         return Status.Success;
     }
 }

@@ -16,6 +16,12 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private LayerMask interactableLayers;
     [SerializeField] private RectTransform selectionBox;
 
+    [SerializeField] private SupplySO woodSO;
+    [SerializeField] private SupplySO stoneSO;
+
+    private int wood;
+    private int stone;
+
     private Vector2 startingMousePosition;
 
     private ActionBase activeAction;
@@ -43,6 +49,20 @@ public class PlayerInput : MonoBehaviour
         Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
         Bus<UnitSpawnEvent>.OnEvent += HandleUnitSpawn;
         Bus<ActionSelectedEvent>.OnEvent += HandleActionSelected;
+
+        Bus<SupplyEvent>.OnEvent += (evt) =>
+        {
+            if (evt.Supply.Equals(woodSO))
+            {
+                wood += evt.Amount;
+            }
+            if (evt.Supply.Equals(stoneSO))
+            {
+                stone += evt.Amount;
+            }
+
+            Debug.Log($"Wood {wood}, Stone {stone}");
+        };
     }
 
     private void OnDestroy()

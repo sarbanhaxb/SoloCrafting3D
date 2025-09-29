@@ -1313,6 +1313,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 704
   selectionBox: {fileID: 1349992452}
+  woodSO: {fileID: 11400000, guid: f32384934c1e6cf4481b4ae53fee5b23, type: 2}
+  stoneSO: {fileID: 11400000, guid: 86ec42aac8cef8647a9070baf7dd3778, type: 2}
 --- !u!224 &174758074 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4132060917513009427, guid: 786720b28c0793b42b970fc1b50fae61, type: 3}
@@ -5866,6 +5868,7 @@ GameObject:
   - component: {fileID: 1261490277}
   - component: {fileID: 1261490276}
   - component: {fileID: 1261490280}
+  - component: {fileID: 1261490281}
   m_Layer: 5
   m_Name: Runtime UI UGUI
   m_TagString: Untagged
@@ -5971,6 +5974,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RuntimeUI
   actionsUI: {fileID: 1272453947}
   buildingBuildingUI: {fileID: 1049974787}
+--- !u!114 &1261490281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261490275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e01154979b3443418fe8288ee2cb64b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Supplies
+  woodText: {fileID: 927468454}
+  goldText: {fileID: 513093474}
+  stoneText: {fileID: 389589458}
+  woodSO: {fileID: 11400000, guid: f32384934c1e6cf4481b4ae53fee5b23, type: 2}
+  stoneSO: {fileID: 11400000, guid: 86ec42aac8cef8647a9070baf7dd3778, type: 2}
 --- !u!1 &1263752905
 GameObject:
   m_ObjectHideFlags: 0

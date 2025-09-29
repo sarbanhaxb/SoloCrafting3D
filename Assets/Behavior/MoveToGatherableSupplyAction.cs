@@ -49,7 +49,7 @@ public partial class MoveToGatherableSupplyAction : Action
             return Status.Running;
         }
 
-        if (!Supply.Value.IsBusy && Supply.Value.Amount > 0)
+        if (!Supply.Value.IsBusy && Supply.Value.Amount > 0 && !agent.pathPending)
         {
             return Status.Success;
         }
