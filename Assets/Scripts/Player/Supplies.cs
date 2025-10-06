@@ -28,13 +28,17 @@ public class Supplies : MonoBehaviour
     {
         if (evt.Supply.Equals(woodSO))
         {
+            Debug.Log(Wood.ToString());
+
             Wood += evt.Amount;
-            woodText.SetText(woodSO.ToString());
+            woodText.SetText(Wood.ToString());
         }
         else if (evt.Supply.Equals(stoneSO))
         {
+            Debug.Log(Stone.ToString());
+
             Stone += evt.Amount;
-            stoneText.SetText(stoneSO.ToString());
+            stoneText.SetText(Stone.ToString());
         }
     }
 }

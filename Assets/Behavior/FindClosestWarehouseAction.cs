@@ -11,7 +11,7 @@ public partial class FindClosestWarehouseAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Unit;
     [SerializeReference] public BlackboardVariable<GameObject> Warehouse;
-    [SerializeReference] public BlackboardVariable<float> SearchRadius = new(20f);
+    [SerializeReference] public BlackboardVariable<float> SearchRadius = new(10);
     [SerializeReference] public BlackboardVariable<UnitSO> WarehouseBuilding;
 
     protected override Status OnStart()
@@ -32,13 +32,11 @@ public partial class FindClosestWarehouseAction : Action
         }
         if (nearbyWarehouses.Count == 0)
         {
-            Debug.Log($"{ToString()}: Failure");
             return Status.Failure;
         }
 
         Warehouse.Value = nearbyWarehouses[0].gameObject;
 
-        Debug.Log($"{ToString()}: Success");
         return Status.Success;
     }
 }

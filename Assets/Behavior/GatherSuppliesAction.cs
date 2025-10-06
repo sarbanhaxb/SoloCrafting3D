@@ -40,10 +40,8 @@ public partial class GatherSuppliesAction : Action
     {
         if (GatherableSupplies.Value.Supply.BaseGatherTime + enterTime <= Time.time)
         {
-            Debug.Log("Success");
             return Status.Success;
         }
-        Debug.Log("Running");
         return Status.Running;
     }
 

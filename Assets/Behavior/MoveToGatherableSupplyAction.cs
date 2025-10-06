@@ -44,7 +44,7 @@ public partial class MoveToGatherableSupplyAction : Action
             animator.SetFloat(SPEED, agent.velocity.magnitude);
         }
 
-        if (agent.remainingDistance >= agent.stoppingDistance)
+        if (agent.remainingDistance >= agent.stoppingDistance && agent.hasPath)
         {
             return Status.Running;
         }

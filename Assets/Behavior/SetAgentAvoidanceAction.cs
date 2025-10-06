@@ -20,7 +20,6 @@ public partial class SetAgentAvoidanceAction : Action
         }
 
         agent.obstacleAvoidanceType = (ObstacleAvoidanceType)AvoidanceQuality.Value;
-
         return Status.Success;
     }
 }

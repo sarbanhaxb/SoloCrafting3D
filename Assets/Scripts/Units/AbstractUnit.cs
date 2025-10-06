@@ -12,7 +12,7 @@ public abstract class AbstractUnit : AbstractCommandable, IMoveable
     protected const string COMMAND = "Command";
 
     public float AgentRadius => agent.radius;
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
     protected BehaviorGraphAgent graphAgent;
     private void Awake()
     {
