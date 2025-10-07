@@ -73,7 +73,13 @@ public class PlayerInput : MonoBehaviour
         Bus<ActionSelectedEvent>.OnEvent -= HandleActionSelected;
     }
 
-    private void HandleUnitSelected(UnitSelectedEvent evt) => selectedUnits.Add(evt.Unit);
+    private void HandleUnitSelected(UnitSelectedEvent evt)
+    {
+        if (!selectedUnits.Contains(evt.Unit))
+        {
+            selectedUnits.Add(evt.Unit);
+        }
+    }
     private void HandleUnitDeselected(UnitDeselectedEvent evt) => selectedUnits.Remove(evt.Unit);
     private void HandleUnitSpawn(UnitSpawnEvent evt) => aliveUnits.Add(evt.Unit);
     private void HandleActionSelected(ActionSelectedEvent evt)
