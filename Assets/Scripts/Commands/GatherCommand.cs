@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gather Action", menuName = "Units/Commands/Gather", order =105)]
 public class GatherCommand : ActionBase
 {
-    [SerializeField] private UnitSO warehouseSO;
+    [SerializeField] private AbstractUnitSO warehouseSO;
     public override bool CanHandle(CommandContext context)
     {
         return context.Commandable is Worker

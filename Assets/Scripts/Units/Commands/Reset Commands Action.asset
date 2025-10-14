@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef30219a6fc2f774e993226e314260bf, type: 3}
   m_Name: Reset Commands Action
   m_EditorClassIdentifier: Assembly-CSharp::OverrideCommandsCommand
-  <Icon>k__BackingField: {fileID: 0}
-  <Slot>k__BackingField: 0
-  <RequiresClickToActivate>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 936260e138e0c87439378deb49cb6ee1, type: 3}
+  <Slot>k__BackingField: 8
+  <RequiresClickToActivate>k__BackingField: 0
   <Commands>k__BackingField: []

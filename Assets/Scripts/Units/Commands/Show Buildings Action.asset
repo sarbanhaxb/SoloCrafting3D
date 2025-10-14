@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef30219a6fc2f774e993226e314260bf, type: 3}
   m_Name: Show Buildings Action
   m_EditorClassIdentifier: Assembly-CSharp::OverrideCommandsCommand
-  <Icon>k__BackingField: {fileID: 0}
-  <Slot>k__BackingField: 0
-  <RequiresClickToActivate>k__BackingField: 1
-  <Commands>k__BackingField: []
+  <Icon>k__BackingField: {fileID: 21300000, guid: e36ef395c8a59bd4bb3a74f965e546a1, type: 3}
+  <Slot>k__BackingField: 6
+  <RequiresClickToActivate>k__BackingField: 0
+  <Commands>k__BackingField:
+  - {fileID: 11400000, guid: eaadb210a443a1e41a41f326dcac0b7d, type: 2}
+  - {fileID: 11400000, guid: 27f0659cf580147418b57c8480a07637, type: 2}

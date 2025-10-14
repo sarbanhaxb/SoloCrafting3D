@@ -12,7 +12,7 @@ public partial class FindClosestWarehouseAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Unit;
     [SerializeReference] public BlackboardVariable<GameObject> Warehouse;
     [SerializeReference] public BlackboardVariable<float> SearchRadius = new(10);
-    [SerializeReference] public BlackboardVariable<UnitSO> WarehouseBuilding;
+    [SerializeReference] public BlackboardVariable<BuildingSO> WarehouseBuilding;
 
     protected override Status OnStart()
     {

@@ -35,8 +35,6 @@ public class Supplies : MonoBehaviour
         }
         else if (evt.Supply.Equals(stoneSO))
         {
-            Debug.Log(Stone.ToString());
-
             Stone += evt.Amount;
             stoneText.SetText(Stone.ToString());
         }

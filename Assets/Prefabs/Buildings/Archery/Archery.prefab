@@ -150,7 +150,7 @@ MonoBehaviour:
   <AvailableCommands>k__BackingField:
   - {fileID: 11400000, guid: 11b96cbd2144d5c4d8813be4235f5f07, type: 2}
   decalProjector: {fileID: 8674285406326497995}
-  <UnitSO>k__BackingField: {fileID: 11400000, guid: a57d202fe7056bf47acd624bba1dc638, type: 2}
+  <UnitSO>k__BackingField: {fileID: 11400000, guid: ebb926257c2302d4f845bc68ba11482e, type: 2}
   <CurrentQueueStartTime>k__BackingField: 0
   <BuildingUnit>k__BackingField: {fileID: 0}
 --- !u!1001 &5193087043827018617

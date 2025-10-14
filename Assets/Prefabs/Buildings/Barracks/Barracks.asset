@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c14e8e4698ac64fbf3aafe130d927f, type: 3}
+  m_Script: {fileID: 11500000, guid: eb11f7c0975723642a5f235b0b42fe91, type: 3}
   m_Name: Barracks
-  m_EditorClassIdentifier: Assembly-CSharp::UnitSO
-  <Health>k__BackingField: 500
-  <Prefab>k__BackingField: {fileID: 8699369407409711727, guid: 47f8bf280807e4e4c8e917b70313c9f7, type: 3}
-  <BuildTime>k__BackingField: 15
-  <Icon>k__BackingField: {fileID: 21300000, guid: daa4851cf0750ce45b41320d3ad6ec33, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingSO
+  <Health>k__BackingField: 100
+  <Prefab>k__BackingField: {fileID: 0}
+  <BuildTime>k__BackingField: 5
+  <Icon>k__BackingField: {fileID: 0}
+  <PlacementMaterial>k__BackingField: {fileID: 0}
