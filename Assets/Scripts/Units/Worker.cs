@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class Worker : AbstractUnit, IBuildingBuilder
 {
+    private const string WAREHOUSE = "Warehouse";
+    private const string BUILDINGSO = "BuildingSO";
+    private const string GHOST = "Ghost";
+    private const string TARGETLOCATION = "TargetLocation";
+    private new const string COMMAND = "Command";
 
     public bool HasSupplies
     {
@@ -29,15 +34,15 @@ public class Worker : AbstractUnit, IBuildingBuilder
 
     public void ReturnSupplies(GameObject warehouse)
     {
-        graphAgent.SetVariableValue("Warehouse", warehouse);
-        graphAgent.SetVariableValue("Command", UnitCommands.ReturnSupplies);
+        graphAgent.SetVariableValue(WAREHOUSE, warehouse);
+        graphAgent.SetVariableValue(COMMAND, UnitCommands.ReturnSupplies);
     }
 
     public void Gather(GatherableSupply supply)
     {
         graphAgent.SetVariableValue("Supply", supply);
         graphAgent.SetVariableValue("TargetGameObject", supply.gameObject);
-        graphAgent.SetVariableValue("Command", UnitCommands.Gather);
+        graphAgent.SetVariableValue(COMMAND, UnitCommands.Gather);
     }
 
     public GameObject Build(BuildingSO building, Vector3 targetLocation)
@@ -53,6 +58,10 @@ public class Worker : AbstractUnit, IBuildingBuilder
             return null;
         }
 
+        graphAgent.SetVariableValue(BUILDINGSO, building);
+        graphAgent.SetVariableValue(TARGETLOCATION, targetLocation);
+        graphAgent.SetVariableValue(GHOST, instance);
+        graphAgent.SetVariableValue(COMMAND, UnitCommands.BuildBuilding);
 
         return instance;
     }

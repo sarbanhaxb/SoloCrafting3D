@@ -46,7 +46,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6192451376464622843}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -55,7 +55,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.1
+  m_Height: 1.5
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -77,6 +77,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f9e3e5b83359b643bdc6ceee7f75558, type: 2}
   - {fileID: 11400000, guid: eaadb210a443a1e41a41f326dcac0b7d, type: 2}
   - {fileID: 11400000, guid: e1e47622352a2264296ab17f4b1ce44a, type: 2}
+  - {fileID: 11400000, guid: 2b3608ad65e2d9a448cf9c319a1a8991, type: 2}
   decalProjector: {fileID: 5279566401570253507}
   <UnitSO>k__BackingField: {fileID: 11400000, guid: 5b2f02ae2ebb0e64b8c231d93aac5f72, type: 2}
 --- !u!136 &7138020239448037869
@@ -98,10 +99,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.360861
+  m_Height: 1.6313397
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: -1.4018505e-11, y: 0.686778, z: 0.0028409956}
 --- !u!54 &1145008352325283642
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -175,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408984, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 408984, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -208,6 +209,14 @@ PrefabInstance:
     - target: {fileID: 408984, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6641990524503544839, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8940405365178321467, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5997459233353443502, guid: 53eb1e18130e9be4387a785b482187e1, type: 3}
