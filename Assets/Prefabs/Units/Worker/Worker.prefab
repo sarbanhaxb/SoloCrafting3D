@@ -78,7 +78,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eaadb210a443a1e41a41f326dcac0b7d, type: 2}
   - {fileID: 11400000, guid: e1e47622352a2264296ab17f4b1ce44a, type: 2}
   decalProjector: {fileID: 5279566401570253507}
-  <UnitSO>k__BackingField: {fileID: 11400000, guid: dbfd686087620bd46974d13ecdcb0a2b, type: 2}
+  <UnitSO>k__BackingField: {fileID: 11400000, guid: 5b2f02ae2ebb0e64b8c231d93aac5f72, type: 2}
 --- !u!136 &7138020239448037869
 CapsuleCollider:
   m_ObjectHideFlags: 0

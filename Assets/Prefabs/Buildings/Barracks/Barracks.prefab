@@ -152,7 +152,7 @@ MonoBehaviour:
   decalProjector: {fileID: 8674530989686707334}
   <UnitSO>k__BackingField: {fileID: 11400000, guid: ca385cd4b70ce674bafa86ccb0811a75, type: 2}
   <CurrentQueueStartTime>k__BackingField: 0
-  <BuildingUnit>k__BackingField: {fileID: 0}
+  <BuildingUnit>k__BackingField: {fileID: 11400000, guid: ca385cd4b70ce674bafa86ccb0811a75, type: 2}
 --- !u!1001 &5149947819786239369
 PrefabInstance:
   m_ObjectHideFlags: 0

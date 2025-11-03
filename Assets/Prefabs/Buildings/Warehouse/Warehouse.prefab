@@ -115,6 +115,7 @@ MonoBehaviour:
   <UnitSO>k__BackingField: {fileID: 11400000, guid: c8100e659e0d7054c99d596c7fb0d075, type: 2}
   <CurrentQueueStartTime>k__BackingField: 0
   <BuildingUnit>k__BackingField: {fileID: 11400000, guid: c8100e659e0d7054c99d596c7fb0d075, type: 2}
+  mainRenderer: {fileID: 4537621337100886871}
 --- !u!65 &5511590685393574940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -212,5 +213,10 @@ PrefabInstance:
 --- !u!4 &4537621337098985911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: aec20226064bbcc4d850e8da90e49a4b, type: 3}
+  m_PrefabInstance: {fileID: 4537621337098861367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4537621337100886871 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: aec20226064bbcc4d850e8da90e49a4b, type: 3}
   m_PrefabInstance: {fileID: 4537621337098861367}
   m_PrefabAsset: {fileID: 0}

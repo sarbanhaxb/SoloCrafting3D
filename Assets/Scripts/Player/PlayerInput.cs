@@ -25,6 +25,7 @@ public class PlayerInput : MonoBehaviour
     private Vector2 startingMousePosition;
 
     private ActionBase activeAction;
+    private GameObject ghostInstance;
     private bool wasMouseDownOnUI;
     private CinemachineFollow cinemachineFollow;
     private float zoomStartTime;
@@ -89,6 +90,10 @@ public class PlayerInput : MonoBehaviour
         {
             ActivateAction(new RaycastHit());
         }
+        else if(activeAction.GhostPrefab != null) 
+        {
+            ghostInstance = Instantiate(activeAction.GhostPrefab);
+        }
     }
 
     private void Update()
@@ -98,6 +103,25 @@ public class PlayerInput : MonoBehaviour
         HandleRotation();
         HandleRightClick();
         HandleDragSelect();
+        HandleGhost();
+    }
+
+    private void HandleGhost()
+    {
+        if (ghostInstance == null) return;
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            Destroy(ghostInstance);
+            ghostInstance = null;
+            activeAction = null;
+            return;
+        }
+
+        Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, floorLayers))
+        {
+            ghostInstance.transform.position = hit.point;
+        }
     }
 
     private void HandleDragSelect()
@@ -236,6 +260,11 @@ public class PlayerInput : MonoBehaviour
 
     private void ActivateAction(RaycastHit hit)
     {
+        if(ghostInstance != null)
+        {
+            Destroy(ghostInstance);
+            ghostInstance = null;
+        }
         List<AbstractCommandable> abstractCommandables = selectedUnits
                             .Where((unit) => unit is AbstractCommandable)
                             .Cast<AbstractCommandable>()

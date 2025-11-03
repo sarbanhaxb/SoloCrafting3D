@@ -3,7 +3,7 @@ using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Worker : AbstractUnit
+public class Worker : AbstractUnit, IBuildingBuilder
 {
 
     public bool HasSupplies
@@ -38,6 +38,23 @@ public class Worker : AbstractUnit
         graphAgent.SetVariableValue("Supply", supply);
         graphAgent.SetVariableValue("TargetGameObject", supply.gameObject);
         graphAgent.SetVariableValue("Command", UnitCommands.Gather);
+    }
+
+    public GameObject Build(BuildingSO building, Vector3 targetLocation)
+    {
+        GameObject instance = Instantiate(building.Prefab, targetLocation, Quaternion.identity);
+        if(instance.TryGetComponent(out BaseBuilding baseBuilding))
+        {
+            baseBuilding.ShowGhostVisuals();
+        }
+        else
+        {
+            Debug.LogError($"Missing BaseBuildng on Prefab for BuildingSO \"{building.name}\"! Cannot build!");
+            return null;
+        }
+
+
+        return instance;
     }
     private void HandleGatherSupplies(GameObject self, int amount, SupplySO supply)
     {

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b2838379e761f44d8a8fb97762b3027, type: 3}
+  m_Name: Build Warehouse
+  m_EditorClassIdentifier: Assembly-CSharp::BuildBuildingCommand
+  <Icon>k__BackingField: {fileID: 0}
+  <Slot>k__BackingField: 0
+  <RequiresClickToActivate>k__BackingField: 1
+  <GhostPrefab>k__BackingField: {fileID: 806669163073506904, guid: a2cba2aa4e6b41043ab26c757fe37914, type: 3}
+  <Building>k__BackingField: {fileID: 11400000, guid: c8100e659e0d7054c99d596c7fb0d075, type: 2}

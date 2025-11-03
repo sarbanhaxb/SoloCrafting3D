@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb11f7c0975723642a5f235b0b42fe91, type: 3}
   m_Name: Town Hall
   m_EditorClassIdentifier: Assembly-CSharp::BuildingSO
-  <Health>k__BackingField: 100
-  <Prefab>k__BackingField: {fileID: 0}
+  <Health>k__BackingField: 500
+  <Prefab>k__BackingField: {fileID: 8237793216527776629, guid: 1b971eb7381af954fa7ed12948a5200f, type: 3}
   <BuildTime>k__BackingField: 5
-  <Icon>k__BackingField: {fileID: 0}
-  <PlacementMaterial>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 220277876e881174e90351fa58896b21, type: 3}
+  <PlacementMaterial>k__BackingField: {fileID: 2100000, guid: 88da19d152d9c494180c6a7b9756e8ee, type: 2}
